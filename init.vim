@@ -41,6 +41,8 @@ if has("eval")   "indicates: not in vim.tiny
     let mapleader=' '
     noremap <space>n :noh<cr>
 
+    " python
+    autocmd Filetype python map <buffer> <leader>r :w<cr>:exec '!python3' shellescape(@%, 1)<cr>
 
     " terminal (just in case)
     tnoremap <Esc> <c-\><c-n> " tnoremap <Esc><Esc> <c-\><c-n><c-w>h
