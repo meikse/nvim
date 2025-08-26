@@ -1,15 +1,15 @@
 filetype plugin indent on
 set clipboard+=unnamedplus
 set autochdir
-set encoding=UTF-8 
+set encoding=UTF-8
 set number relativenumber
 set autoindent
 set smartindent
 set cindent
 set mouse=a
-set tabstop=4     
+set tabstop=2
 set expandtab     
-set shiftwidth=4  
+set shiftwidth=2
 set cursorline cursorcolumn
 set ignorecase
 " set spell
@@ -41,8 +41,9 @@ if has("eval")   "indicates: not in vim.tiny
     let mapleader=' '
     noremap <space>n :noh<cr>
 
-    " python
+    " shortcuts for compilation/running
     autocmd Filetype python map <buffer> <leader>r :w<cr>:exec '!python3' shellescape(@%, 1)<cr>
+    autocmd FileType cpp nnoremap <buffer> <leader>r :w<CR>:!g++ % -o %:r && ./%:r<CR>
 
     " terminal (just in case)
     tnoremap <Esc> <c-\><c-n> " tnoremap <Esc><Esc> <c-\><c-n><c-w>h
@@ -60,10 +61,11 @@ if has("eval")   "indicates: not in vim.tiny
     " vertical help alignement
     autocmd FileType help wincmd H
     
-    if has("nvim")   "indicates: in Neovim
+    if has("nvim")   "indicates: not in vim.tiny 
         call plug#begin('~/.config/nvim/plugged')
         Plug 'voldikss/vim-translator'
         Plug 'jiangmiao/auto-pairs' 
+        Plug 'lervag/vimtex' 
         Plug 'tpope/vim-commentary'
         Plug 'tpope/vim-fugitive'
         Plug 'christoomey/vim-tmux-navigator'
@@ -72,8 +74,6 @@ if has("eval")   "indicates: not in vim.tiny
         
         " vim-commentary
         noremap <silent> <leader>c :Commentary<CR>
-
-        autocmd Filetype python map <buffer> <leader>r :w<cr>:exec '!python3' shellescape(@%, 1)<cr>
 
         " vim-translator
         let g:translator_target_lang = 'de'
@@ -93,13 +93,6 @@ if has("eval")   "indicates: not in vim.tiny
         noremap <silent> <leader>gm <cmd>Git merge<cr>
         noremap <silent> <leader>gb <cmd>Git branch<cr>
         noremap <silent> <leader>gr <cmd>Git restore --staged<cr>
-
-        " copilot
-        imap <silent><script><expr> <C-l> copilot#Accept("\<CR>")
-
     endif
 
 endif
-
-" lua << EOF
-" EOF
